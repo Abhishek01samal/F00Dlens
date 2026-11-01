@@ -535,6 +535,3 @@ This project is open-source and available under the **MIT License**.
 
 ---
 
-<p align="center">
-  Built with ❤️ for healthier living and transparent food intelligence.
-</p>
