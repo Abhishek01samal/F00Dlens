@@ -6,12 +6,11 @@ node_modules
 
 # Environment variables & secrets (CRITICAL: Do NOT commit)
 .env
+.env*
 .env*.local
 .env.development.local
 .env.test.local
 .env.production.local
-.env.*
-!.env.example
 
 # Next.js build output & cache
 .next/
