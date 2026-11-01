@@ -196,12 +196,21 @@ export function LoginPage({ onLogin, onSignUp, onGoogleLogin }: LoginPageProps) 
   useEffect(() => {
     // Persisted theme should apply on login screen too (even after logout)
     try {
-      const storedVars = localStorage.getItem("foodlens-theme-vars");
       const storedTheme = localStorage.getItem("foodlens-theme-id");
-      if (storedTheme) document.documentElement.setAttribute("data-theme", storedTheme);
-      if (storedVars) {
+      const effectiveTheme = (!storedTheme || storedTheme === "matrix" || storedTheme === "sunshine") ? "sunrise" : storedTheme;
+      document.documentElement.setAttribute("data-theme", effectiveTheme);
+      const storedVars = localStorage.getItem("foodlens-theme-vars");
+      if (storedVars && effectiveTheme !== "sunrise") {
         const vars = JSON.parse(storedVars) as Record<string, string>;
         Object.entries(vars).forEach(([k, v]) => document.documentElement.style.setProperty(k, v));
+      } else {
+        const themeKeys = [
+          "--background", "--foreground", "--card", "--card-foreground",
+          "--popover", "--popover-foreground", "--primary", "--primary-foreground",
+          "--secondary", "--secondary-foreground", "--muted", "--muted-foreground",
+          "--accent", "--accent-foreground", "--border", "--input", "--ring"
+        ];
+        themeKeys.forEach((key) => document.documentElement.style.removeProperty(key));
       }
     } catch {
       // ignore

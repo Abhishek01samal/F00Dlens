@@ -41,7 +41,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider publishableKey={publishableKey} afterSignOutUrl="/">
-      <html lang="en">
+      <html lang="en" data-theme="sunrise">
         <head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

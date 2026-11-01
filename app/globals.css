@@ -75,8 +75,9 @@
     --ring: 210 100% 55%;
   }
 
-  /* Sunrise Theme (Light) */
-  [data-theme="sunrise"] {
+  /* Sunrise / Sunshine Theme (Light) */
+  [data-theme="sunrise"],
+  [data-theme="sunshine"] {
     --background: 40 40% 97%;
     --foreground: 20 15% 15%;
     --card: 40 40% 100%;

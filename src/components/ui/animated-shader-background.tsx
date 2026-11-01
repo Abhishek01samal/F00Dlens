@@ -27,7 +27,7 @@ const AnimatedShaderBackground = memo(({ className }: AnimatedShaderBackgroundPr
     const getThemeColor = (variable: string) => {
       const style = getComputedStyle(document.documentElement);
       const colorStr = style.getPropertyValue(variable).trim();
-      if (!colorStr) return new THREE.Color(0x22c55e); // Default fallback
+      if (!colorStr) return new THREE.Color(0xf97316); // Default sunshine fallback
       
       // Parse HSL "142 70% 45%"
       const parts = colorStr.split(' ');
@@ -37,7 +37,7 @@ const AnimatedShaderBackground = memo(({ className }: AnimatedShaderBackgroundPr
         const l = parseInt(parts[2]!, 10) / 100;
         return new THREE.Color().setHSL(h, s, l);
       }
-      return new THREE.Color(0x22c55e);
+      return new THREE.Color(0xf97316);
     };
 
     const material = new THREE.ShaderMaterial({

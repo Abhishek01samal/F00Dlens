@@ -29,9 +29,11 @@ import type { HistoryItem } from "@/hooks/useHistoryStore";
 
 // Theme definitions
 type Theme = 
-  | "matrix" 
+  | "sunrise"
+  | "sunshine"
+  | "golden"
+  | "sunset"
   | "midnight" 
-  | "sunrise" 
   | "neon-purple" 
   | "ocean" 
   | "ember" 
@@ -39,10 +41,9 @@ type Theme =
   | "cyberpunk"
   | "forest"
   | "cherry"
-  | "golden"
   | "lavender"
-  | "sunset"
-  | "mint";
+  | "mint"
+  | "matrix";
 
 interface ThemeConfig {
   id: Theme;
@@ -56,27 +57,30 @@ interface ThemeConfig {
 }
 
 const themes: ThemeConfig[] = [
-  { id: "matrix", name: "Matrix", colors: { primary: "#00ff00", secondary: "#003300", accent: "#00ff00" }, preview: "linear-gradient(135deg, #000 0%, #003300 50%, #001100 100%)" },
+  { id: "sunrise", name: "Sunshine", colors: { primary: "#f97316", secondary: "#fef3c7", accent: "#f43f5e" }, preview: "linear-gradient(135deg, #fef3c7 0%, #fed7aa 50%, #fce7f3 100%)" },
+  { id: "golden", name: "Golden", colors: { primary: "#eab308", secondary: "#1a1a0a", accent: "#fde047" }, preview: "linear-gradient(135deg, #1a1a0a 0%, #422006 50%, #1a1a0a 100%)" },
+  { id: "sunset", name: "Sunset", colors: { primary: "#fb923c", secondary: "#1a0f0a", accent: "#f472b6" }, preview: "linear-gradient(135deg, #1a0f0a 0%, #7c2d12 30%, #831843 70%, #1a0f0a 100%)" },
   { id: "midnight", name: "Midnight", colors: { primary: "#3b82f6", secondary: "#1e293b", accent: "#60a5fa" }, preview: "linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0c1929 100%)" },
-  { id: "sunrise", name: "Sunrise", colors: { primary: "#f97316", secondary: "#fef3c7", accent: "#f43f5e" }, preview: "linear-gradient(135deg, #fef3c7 0%, #fed7aa 50%, #fce7f3 100%)" },
-  { id: "neon-purple", name: "Neon Purple", colors: { primary: "#a855f7", secondary: "#1a0a2e", accent: "#ec4899" }, preview: "linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 50%, #1a0a2e 100%)" },
   { id: "ocean", name: "Ocean", colors: { primary: "#14b8a6", secondary: "#0c1929", accent: "#22c55e" }, preview: "linear-gradient(135deg, #0c1929 0%, #134e4a 50%, #0c2d2d 100%)" },
+  { id: "neon-purple", name: "Neon Purple", colors: { primary: "#a855f7", secondary: "#1a0a2e", accent: "#ec4899" }, preview: "linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 50%, #1a0a2e 100%)" },
   { id: "ember", name: "Ember", colors: { primary: "#f97316", secondary: "#1a0a0a", accent: "#eab308" }, preview: "linear-gradient(135deg, #1a0a0a 0%, #451a03 50%, #1a0a0a 100%)" },
   { id: "arctic", name: "Arctic", colors: { primary: "#0ea5e9", secondary: "#f0f9ff", accent: "#06b6d4" }, preview: "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #ecfeff 100%)" },
   { id: "cyberpunk", name: "Cyberpunk", colors: { primary: "#f0f", secondary: "#0a0a1a", accent: "#0ff" }, preview: "linear-gradient(135deg, #0a0a1a 0%, #1a0a2a 50%, #0a1a2a 100%)" },
   { id: "forest", name: "Forest", colors: { primary: "#22c55e", secondary: "#0a1a0a", accent: "#86efac" }, preview: "linear-gradient(135deg, #0a1a0a 0%, #14532d 50%, #0a1a0a 100%)" },
   { id: "cherry", name: "Cherry", colors: { primary: "#f43f5e", secondary: "#1a0a0f", accent: "#fb7185" }, preview: "linear-gradient(135deg, #1a0a0f 0%, #4c0519 50%, #1a0a0f 100%)" },
-  { id: "golden", name: "Golden", colors: { primary: "#eab308", secondary: "#1a1a0a", accent: "#fde047" }, preview: "linear-gradient(135deg, #1a1a0a 0%, #422006 50%, #1a1a0a 100%)" },
   { id: "lavender", name: "Lavender", colors: { primary: "#a78bfa", secondary: "#faf5ff", accent: "#c4b5fd" }, preview: "linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #fdf4ff 100%)" },
-  { id: "sunset", name: "Sunset", colors: { primary: "#fb923c", secondary: "#1a0f0a", accent: "#f472b6" }, preview: "linear-gradient(135deg, #1a0f0a 0%, #7c2d12 30%, #831843 70%, #1a0f0a 100%)" },
   { id: "mint", name: "Mint", colors: { primary: "#34d399", secondary: "#f0fdf4", accent: "#a7f3d0" }, preview: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #d1fae5 100%)" },
+  { id: "matrix", name: "Matrix", colors: { primary: "#00ff00", secondary: "#003300", accent: "#00ff00" }, preview: "linear-gradient(135deg, #000 0%, #003300 50%, #001100 100%)" },
 ];
 
 // Extended theme CSS variables
 const themeVariables: Record<Theme, Record<string, string>> = {
+  sunrise: {},
+  sunshine: {},
+  golden: {},
+  sunset: {},
   matrix: {},
   midnight: {},
-  sunrise: {},
   "neon-purple": {},
   ocean: {},
   ember: {},
@@ -243,8 +247,11 @@ export const UserDropdown = memo(({
   className
 }: UserDropdownProps) => {
   const [currentTheme, setCurrentTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") return "sunrise";
     const stored = localStorage.getItem("foodlens-theme-id") as Theme | null;
-    return stored ?? "matrix";
+    // Default to Sunshine (sunrise) - override matrix if previously defaulted
+    if (!stored || stored === "matrix" || stored === "sunshine") return "sunrise";
+    return stored;
   });
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -256,6 +263,14 @@ export const UserDropdown = memo(({
       Object.entries(vars).forEach(([key, value]) => {
         document.documentElement.style.setProperty(key, value);
       });
+    } else {
+      const themeKeys = [
+        "--background", "--foreground", "--card", "--card-foreground",
+        "--popover", "--popover-foreground", "--primary", "--primary-foreground",
+        "--secondary", "--secondary-foreground", "--muted", "--muted-foreground",
+        "--accent", "--accent-foreground", "--border", "--input", "--ring"
+      ];
+      themeKeys.forEach((key) => document.documentElement.style.removeProperty(key));
     }
 
     // Persist across refresh + keep login theme consistent

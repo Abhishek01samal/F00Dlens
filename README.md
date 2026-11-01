@@ -10,7 +10,6 @@
 
 <p align="center">
   <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js-15.3.4-black?style=for-the-badge&logo=next.js" alt="Next.js" /></a>
-  <a href="https://react.dev/"><img src="https://img.shields.io/badge/React-19.2.0-blue?style=for-the-badge&logo=react" alt="React" /></a>
   <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-5.8-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" /></a>
   <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" /></a>
   <a href="https://clerk.com/"><img src="https://img.shields.io/badge/Auth-Clerk_v6-6C47FF?style=for-the-badge&logo=clerk" alt="Clerk" /></a>
@@ -221,7 +220,7 @@ foodlens-ai/
 │   │   │   ├── drawer.tsx                  # Mobile bottom sheet (Vaul)
 │   │   │   ├── dropdown-menu.tsx           # Contextual dropdown menus
 │   │   │   ├── fluid-menu.tsx              # Morphing fluid action menu
-│   │   │   ├── form.tsx                    # React Hook Form field bindings
+│   │   │   ├── form.tsx                    # Form field bindings
 │   │   │   ├── hover-card.tsx              # Preview card triggered on hover
 │   │   │   ├── input-otp.tsx               # One-time passcode input
 │   │   │   ├── input.tsx                   # Text input primitives
@@ -265,7 +264,7 @@ foodlens-ai/
 │   │   ├── SplashCursor.tsx                # Interactive dynamic fluid particle cursor
 │   │   └── UploadSection.tsx               # Drag & drop photo upload with preview thumbnails
 │   │
-│   ├── hooks/                              # Custom React Hooks
+│   ├── hooks/                              # Custom Hooks
 │   │   ├── use-mobile.tsx                  # Media query hook for mobile screen detection
 │   │   ├── useAuth.ts                      # Generic authentication hook
 │   │   ├── useClerkAuth.ts                 # Clerk integration hook mirroring user profile
@@ -321,9 +320,8 @@ foodlens-ai/
 
 | Category | Technology | Version | Purpose |
 | :--- | :--- | :--- | :--- |
-| **Framework** | [Next.js](https://nextjs.org/) | `^15.3.4` | React Full-Stack Framework with App Router, SSR, and API routes |
+| **Framework** | [Next.js](https://nextjs.org/) | `^15.3.4` | Full-Stack Web Framework with App Router, SSR, and API routes |
 | **Language** | [TypeScript](https://www.typescriptlang.org/) | `^5.8.3` | End-to-end static typing and interface contracts |
-| **Runtime UI** | [React](https://react.dev/) | `^19.2.0` | Latest React with Concurrent Mode and React Server Components |
 | **Styling** | [Tailwind CSS](https://tailwindcss.com/) | `^3.4.17` | Utility-first CSS framework with custom HSL theme tokens |
 | **Component Primitives** | [Radix UI](https://www.radix-ui.com/) | Various | Accessible, unstyled UI primitives (Dialog, Tabs, Accordion, Slider) |
 | **Motion & Animation** | [Framer Motion](https://www.framer.com/motion/) | `^12.36.0` | Production-ready declarative animations and gestures |
@@ -334,8 +332,8 @@ foodlens-ai/
 | **Authentication** | [Clerk](https://clerk.com/) | `^6.21.0` | User authentication (Email/Password, Google OAuth, Session Tokens) |
 | **Database & ORM** | [Supabase](https://supabase.com/) & [Drizzle ORM](https://orm.drizzle.team/) | `^2.118.0` / `0.x` | Managed PostgreSQL database with type-safe schema definitions |
 | **Image Processing** | HTML5 Canvas | Native | In-browser downscaling (1280px max dimension, 0.82 quality JPEG) |
-| **Icons** | [Lucide React](https://lucide.dev/) | `^0.462.0` | Modern, consistent icon family |
-| **Forms & Validation** | [React Hook Form](https://react-hook-form.com/) & [Zod](https://zod.dev/) | `^7.71` / `^3.25` | Schema validation and form state handling |
+| **Icons** | [Lucide](https://lucide.dev/) | `^0.462.0` | Modern, consistent icon family |
+| **Forms & Validation** | [Zod](https://zod.dev/) | `^3.25` | Schema validation and form data integrity |
 | **Toasts** | [Sonner](https://sonner.emilkowal.ski/) | `^1.7.4` | Sleek notification toasts |
 | **Testing** | [Vitest](https://vitest.dev/) & [Testing Library](https://testing-library.com/) | `^4.1.10` / `^16.0` | Unit and integration test runner |
 
@@ -498,7 +496,7 @@ SUPABASE_PROJECT_ID="your_project_id"
 | `npm run dev` | Launches Next.js local development server with Turbopack at `http://localhost:3000` |
 | `npm run build` | Builds an optimized production bundle |
 | `npm run start` | Starts the production server |
-| `npm run lint` | Runs ESLint across all TypeScript and React files |
+| `npm run lint` | Runs ESLint across all TypeScript and application files |
 | `npm run format` | Auto-formats code with Prettier |
 | `npm run test` | Runs the Vitest test suite |
 | `npm run test:watch` | Runs Vitest in interactive watch mode |
@@ -507,7 +505,7 @@ SUPABASE_PROJECT_ID="your_project_id"
 
 ## 🧪 Testing & Quality Assurance
 
-FoodLens AI includes a complete testing setup using **Vitest** and **React Testing Library**:
+FoodLens AI includes a complete testing setup using **Vitest** and **Testing Library**:
 - DOM simulation powered by `jsdom`.
 - Global testing assertions from `@testing-library/jest-dom`.
 - Automated tests cover component rendering, image compressor utility functions, and mock server responses.
