@@ -525,11 +525,5 @@ npm run test
 - [ ] **Price & Store Finder**: Geolocation integration to find the healthiest alternative products at nearby supermarkets.
 - [ ] **PWA (Progressive Web App)**: Offline support and mobile home screen installation for grocery store trips.
 
----
 
-## 📄 License
-
-This project is open-source and available under the **MIT License**.
-
----
 
